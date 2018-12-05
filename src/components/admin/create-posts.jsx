@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {Form, Label,Button} from 'reactstrap'
 import _ from 'lodash';
 import axios from 'axios'
+import {toast} from 'react-toastify';
+import mineRouting from './../../configRouting'
 
 
 class CreatePosts extends Component {
@@ -14,18 +16,19 @@ class CreatePosts extends Component {
 
     handleSubmit=async params=>{
         params.preventDefault();
+
         try {
             const result = await axios.post(
-                'http://localhost:3900/api/create-posts',
+                mineRouting.api_createPosts,
                 JSON.parse(JSON.stringify(this.state)));
 
             if(result.status===200){
-                console.log('your post has been saved on DB')
+                toast.success('پست با موفقیت اضافه شد')
             }
         }
         catch (e) {
             if(e.response && e.response.status===400){
-                console.log('some error has been recorded')
+                toast.error('اضافه کردن پست با مشکلی مواجه شد')
             }
         }
     };
