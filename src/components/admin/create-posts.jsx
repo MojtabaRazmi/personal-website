@@ -22,8 +22,9 @@ class CreatePosts extends Component {
                 mineRouting.api_createPosts,
                 JSON.parse(JSON.stringify(this.state)));
 
+
             if(result.status===200){
-                toast.success('پست با موفقیت اضافه شد')
+                toast.success('پست با موفقیت اضافه شد');
             }
         }
         catch (e) {

@@ -1,4 +1,5 @@
 {
-  "api_createPosts" : "http://localhost:3900/api/create-posts"
-
+  "api_createPosts" : "http://localhost:3900/api/create-posts",
+  "api_getPosts": "http://localhost:3900/api/get-posts",
+  "api_deletePost": "http://localhost:3900/api/delete-post"
 }

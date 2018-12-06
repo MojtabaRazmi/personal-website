@@ -2,7 +2,9 @@ import React,{Component} from 'react';
 import paginate from "../../utils/paginate";
 import Pagination from './../pagination'
 import {Table, Button} from 'reactstrap'
-import getPosts from "../../services/fakePosts";
+import axios from 'axios';
+import mineRouting from './../../configRouting';
+import {toast} from "react-toastify";
 
 class AllPosts extends Component {
     state={
@@ -10,10 +12,6 @@ class AllPosts extends Component {
         currentPage:1,
         pageSize:5
     };
-    componentDidMount() {
-        const posts = getPosts();
-        this.setState({posts})
-    }
 
     getPageData=()=>{
         const {pageSize,currentPage,posts: allPosts } = this.state;
@@ -24,13 +22,44 @@ class AllPosts extends Component {
             paginatePosts : result
         }
     };
+
+    async componentDidMount() {
+        const {data} = await axios.get(mineRouting.api_getPosts);
+        this.setState({posts: data});
+
+    }
+
     handlePageChange = (page)=>{
         this.setState({currentPage : page})
+    };
+
+    handleDelete=async deletePostID=>{
+        const editedState = this.state.posts.filter(p=>deletePostID !==p._id);
+        const originalState = this.state.posts;
+
+        this.setState({posts :editedState});
+        try{
+            const deleteResult = await axios.delete(mineRouting.api_deletePost+'/'+deletePostID,deletePostID);
+
+            if(deleteResult.status===200){
+                toast('حذف پست با موفقیت انجام شد');
+            }
+
+
+        }
+        catch (e) {
+            if(e.response && e.response.status===404){
+                toast.error('پستی با این شناسه یافت نشد');
+
+                this.setState({posts : originalState})
+            }
+        }
     };
 
     render(){
         const {totalCount,paginatePosts}=this.getPageData();
         const {pageSize ,currentPage}= this.state;
+        let countID = 1;
         return(
             <div className='bg-light m-3 p-4 border rounded'>
                 <Table className='table'>
@@ -45,9 +74,9 @@ class AllPosts extends Component {
                     <tbody>
                     {
                         paginatePosts.map(paginatePost =>(
-                            <tr key={paginatePost.id}>
+                            <tr key={paginatePost._id}>
                                 <th scope='row'>
-                                    {paginatePost.id}
+                                    {countID++}
                                 </th>
                                 <td>{paginatePost.postTitle}</td>
                                 <td>{paginatePost.postDate}</td>
@@ -58,7 +87,9 @@ class AllPosts extends Component {
                                     </Button>
                                 </td>
                                 <td>
-                                    <Button className='btn btn-danger'>
+                                    <Button className='btn btn-danger'
+                                            onClick={()=>this.handleDelete(paginatePost._id)}
+                                    >
                                         حذف
                                     </Button>
                                 </td>
