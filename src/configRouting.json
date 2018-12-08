@@ -1,5 +1,10 @@
 {
-  "api_createPosts" : "http://localhost:3900/api/create-posts",
+  "api_createPosts": "http://localhost:3900/api/create-posts",
   "api_getPosts": "http://localhost:3900/api/get-posts",
-  "api_deletePost": "http://localhost:3900/api/delete-post"
+  "api_deletePost": "http://localhost:3900/api/delete-post",
+  "api_editPost": "http://localhost:3900/api/edit-post",
+  "api_getCourses": "http://localhost:3900/api/get-courses",
+  "api_createCourse": "http://localhost:3900/api/create-course",
+  "api_deleteCourse": "http://localhost:3900/api/delete-course",
+  "api_editCourse": "http://localhost:3900/api/edit-course"
 }

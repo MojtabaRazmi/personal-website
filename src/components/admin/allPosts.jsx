@@ -44,8 +44,6 @@ class AllPosts extends Component {
             if(deleteResult.status===200){
                 toast('حذف پست با موفقیت انجام شد');
             }
-
-
         }
         catch (e) {
             if(e.response && e.response.status===404){
@@ -54,6 +52,13 @@ class AllPosts extends Component {
                 this.setState({posts : originalState})
             }
         }
+    };
+
+    handleRedirect=(post)=>{
+        this.props.history.push({
+            pathname : '/admin/editPost',
+            post
+        })
     };
 
     render(){
@@ -82,9 +87,11 @@ class AllPosts extends Component {
                                 <td>{paginatePost.postDate}</td>
                                 <td>{paginatePost.like}</td>
                                 <td>
-                                    <Button className='btn btn-success'>
+
+                                    <Button className='btn btn-success' onClick={()=>this.handleRedirect(paginatePost)}>
                                         ویرایش
                                     </Button>
+
                                 </td>
                                 <td>
                                     <Button className='btn btn-danger'

@@ -2,7 +2,9 @@ import React,{Component} from 'react';
 import paginate from "../../utils/paginate";
 import Pagination from './../pagination'
 import {Table, Button} from 'reactstrap'
-import getCourses from "../../services/fakeCourses";
+import axios from 'axios';
+
+import mineRouting from './../../configRouting'
 
 class AllPosts extends Component {
     state={
@@ -10,9 +12,10 @@ class AllPosts extends Component {
         currentPage:1,
         pageSize:5
     };
-    componentDidMount() {
-        const courses = getCourses();
-        this.setState({courses})
+    async componentDidMount() {
+        const {data} =await axios.get(mineRouting.api_getCourses);
+
+        this.setState({data})
     }
 
     getPageData=()=>{
