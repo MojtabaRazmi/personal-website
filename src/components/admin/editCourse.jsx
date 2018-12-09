@@ -6,7 +6,7 @@ import {toast} from "react-toastify";
 import mineRouting from './../../configRouting'
 
 
-class CreateCourse extends Component {
+class EditCourse extends Component {
     state={
         courseTitle :'',
         courseTime :'',
@@ -14,24 +14,43 @@ class CreateCourse extends Component {
         courseImageUrl: '',
     };
 
+    componentDidMount() {
+        const {course}=this.props.location;
+        if(!course) this.props.history.push('/admin/allCourses')
+
+        this.setState({
+            _id : course._id,
+            courseTitle : course.courseTitle,
+            coursePrice : course.coursePrice,
+            courseImageUrl : course.courseImageUrl,
+            courseTime : course.courseTime,
+
+        })
+    }
+
     handleSubmit=async e=>{
         e.preventDefault();
+
+        const newState = {...this.state};
+        delete newState._id;
+
         try{
-            const createdCourse = await axios.post(
-                mineRouting.api_createCourse,
-                JSON.parse(JSON.stringify(this.state))
+            const createdCourse = await axios.put(
+                mineRouting.api_editCourse+'/'+this.state._id,
+                JSON.parse(JSON.stringify(newState))
             );
 
             if(createdCourse.status===200) {
-                toast.success('دوره با موفقیت اضافه شد')
+                toast.success('دوره با موفقیت ویرایش شد')
             }
         }
         catch (e) {
             if(e.response && e.response===400){
-                toast.error('افزودن دوره با مشکل روبرو شد')
+                toast.error('ویرایش دوره با مشکل روبرو شد')
             }
         }
     };
+
     render(){
         return (
             <Form className='form-group bg-light border rounded m-2 shadow p-5'
@@ -96,7 +115,7 @@ class CreateCourse extends Component {
                 <Button
                     className='btn btn-success m-5'
                 >
-                    ساخت دوره جدید
+                    ویرایش دوره
                 </Button>
             </Form>
         );
@@ -104,4 +123,4 @@ class CreateCourse extends Component {
 
 }
 
-export default CreateCourse;
+export default EditCourse;

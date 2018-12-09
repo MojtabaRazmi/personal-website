@@ -6,5 +6,6 @@
   "api_getCourses": "http://localhost:3900/api/get-courses",
   "api_createCourse": "http://localhost:3900/api/create-course",
   "api_deleteCourse": "http://localhost:3900/api/delete-course",
-  "api_editCourse": "http://localhost:3900/api/edit-course"
+  "api_editCourse": "http://localhost:3900/api/edit-course",
+  "api_postCount": "http://localhost:3900/api/count-post"
 }

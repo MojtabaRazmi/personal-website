@@ -39,7 +39,10 @@ class AllPosts extends Component {
 
         this.setState({posts :editedState});
         try{
-            const deleteResult = await axios.delete(mineRouting.api_deletePost+'/'+deletePostID,deletePostID);
+            const deleteResult = await axios.delete(
+                mineRouting.api_deletePost+'/'+deletePostID,
+                deletePostID
+            );
 
             if(deleteResult.status===200){
                 toast('حذف پست با موفقیت انجام شد');
@@ -88,14 +91,18 @@ class AllPosts extends Component {
                                 <td>{paginatePost.like}</td>
                                 <td>
 
-                                    <Button className='btn btn-success' onClick={()=>this.handleRedirect(paginatePost)}>
+                                    <Button
+                                        className='btn btn-success'
+                                        onClick={()=>this.handleRedirect(paginatePost)}
+                                    >
                                         ویرایش
                                     </Button>
 
                                 </td>
                                 <td>
-                                    <Button className='btn btn-danger'
-                                            onClick={()=>this.handleDelete(paginatePost._id)}
+                                    <Button
+                                        className='btn btn-danger'
+                                        onClick={()=>this.handleDelete(paginatePost._id)}
                                     >
                                         حذف
                                     </Button>

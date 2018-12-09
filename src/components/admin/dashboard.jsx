@@ -14,6 +14,7 @@ import AllCourses from "./allcourses";
 import EditPost from "./editPost";
 
 import 'react-toastify/dist/ReactToastify.css'
+import EditCourse from "./editCourse";
 
 
 class Dashboard extends Component {
@@ -32,6 +33,7 @@ class Dashboard extends Component {
                             <Route path='/admin/create-course' component={CreateCourse}/>
                             <Route path='/admin/allCourses' component={AllCourses}/>
                             <Route path='/admin/editPost' component={EditPost}/>
+                            <Route path='/admin/edit-course' component={EditCourse}/>
                         </Switch>
                     </main>
                 </div>
