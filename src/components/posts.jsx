@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import getPosts from './../services/fakePosts';
 import Like from './like';
 import Pagination from './pagination';
-// import Posts from './posts';
 import paginate from './../utils/paginate';
+import axios from "axios";
+import mineRouting from "../configRouting";
 
 class Posts extends Component {
     state = { 
@@ -11,12 +11,11 @@ class Posts extends Component {
         currentPage:1,
         pageSize:5
     };
-    componentDidMount(){
-         const posts = getPosts();
-         this.setState({
-             posts
-            //  posts:posts
-         })
+
+
+    async componentDidMount() {
+        const {data} = await axios.get(mineRouting.api_getPosts);
+        this.setState({posts: data});
     }
 
     handlePageChange = (page)=>{

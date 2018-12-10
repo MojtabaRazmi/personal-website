@@ -1,24 +1,37 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+import mineRouting from './../configRouting'
 
 class Like extends Component {
     state = { 
-        post:this.props.post
+        postState:this.props.post
     };
 
-    handleLikeClick=()=>{
-        const likedPost ={...this.state.post};
-        likedPost.like++;
-        this.setState({post : likedPost})
+
+
+    handleLikeClick=async likedID=>{
+        const originalState = this.state.postState;
+        let likePost = {...this.state.postState};
+        likePost.like ++;
+        this.setState({postState : likePost});
+
+        try {
+            await axios.put(
+                mineRouting.api_likePost+'/like/'+likedID);
+        }
+        catch (e) {
+            this.setState({postState : originalState})
+        }
     };
 
     render() { 
-        const {post} = this.state;
+        const {postState} = this.state;
         return ( 
             <div className='fa fa-heart float-left'
             style={{color : 'red', cursor:'pointer'}}
-            onClick={this.handleLikeClick}>
+            onClick={()=>this.handleLikeClick(postState._id)}>
                 <badge className='badge-primary badge-pill m-1'>
-                    {post.like}
+                    {postState.like}
                 </badge>
             </div>
         );

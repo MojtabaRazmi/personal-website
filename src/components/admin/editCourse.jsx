@@ -16,7 +16,7 @@ class EditCourse extends Component {
 
     componentDidMount() {
         const {course}=this.props.location;
-        if(!course) this.props.history.push('/admin/allCourses')
+        if(!course) this.props.history.push('/admin/allCourses');
 
         this.setState({
             _id : course._id,

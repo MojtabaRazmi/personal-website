@@ -26,7 +26,6 @@ class AllPosts extends Component {
     async componentDidMount() {
         const {data} = await axios.get(mineRouting.api_getPosts);
         this.setState({posts: data});
-
     }
 
     handlePageChange = (page)=>{
