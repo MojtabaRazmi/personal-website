@@ -9,5 +9,7 @@
   "api_editCourse": "http://localhost:3900/api/edit-course",
   "api_postCount": "http://localhost:3900/api/count-post",
   "api_courseCount": "http://localhost:3900/api/count-course",
-  "api_likePost": "http://localhost:3900/api/like-post"
+  "api_likePost": "http://localhost:3900/api/like-post",
+  "api_createUser": "http://localhost:3900/api/create-user",
+  "api_login": "http://localhost:3900/api/login"
 }
