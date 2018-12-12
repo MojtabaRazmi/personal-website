@@ -15,6 +15,7 @@ import EditPost from "./editPost";
 
 import 'react-toastify/dist/ReactToastify.css'
 import EditCourse from "./editCourse";
+import LogOut from "./logOut";
 
 
 class Dashboard extends Component {
@@ -34,6 +35,7 @@ class Dashboard extends Component {
                             <Route path='/admin/allCourses' component={AllCourses}/>
                             <Route path='/admin/editPost' component={EditPost}/>
                             <Route path='/admin/edit-course' component={EditCourse}/>
+                            <Route path='/admin/logout' component={LogOut}/>
                         </Switch>
                     </main>
                 </div>
